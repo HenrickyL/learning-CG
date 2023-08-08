@@ -19,6 +19,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Window.cpp">
+      <Filter>DXUT\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DXUT.h">
@@ -33,5 +36,10 @@
     <ClInclude Include="Resources.h">
       <Filter>DXUT\Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resources.rc">
+      <Filter>DXUT\Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
