@@ -47,7 +47,7 @@ public:
     void Cursor(const uint cursor);                         // define o cursor da janela
     void Title(const string title);                         // define o título da janela 
     void Size(int width, int height);                       // define o tamanho (largura e altura) da janela
-    void Mode(int mode);                                    // define o modo da janela (FULLSCREEN/WINDOWED)
+    void Mode(WindowModes mode);                                    // define o modo da janela (FULLSCREEN/WINDOWED)
     void Color(int r, int g, int b);                        // define a cor de fundo da janela
 
     void HideCursor(bool hide);                             // habilita ou desabilita a exbição do cursor

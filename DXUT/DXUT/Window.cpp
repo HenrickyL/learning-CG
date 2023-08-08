@@ -20,7 +20,7 @@ Window::Window()
     windowCenterY = windowHeight / 2;                       // centro da janela no eixo y
 }
 
-void Window::Mode(int mode) {
+void Window::Mode(WindowModes mode) {
     this->windowMode = mode;
     if (mode == WINDOWED) {
         // modo em janela
