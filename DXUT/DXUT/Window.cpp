@@ -1,6 +1,11 @@
 #include "Window.h"
 
 // -------------------------------------------------------------------------------
+// inicialização de membros estáticos da classe
+
+void (*Window::inFocus)() = nullptr;						// nenhuma ação ao ganhar foco
+void (*Window::lostFocus)() = nullptr;						// nenhuma ação ao perder foco
+// -------------------------------------------------------------------------------
 // Construtor
 
 Window::Window()
@@ -67,6 +72,25 @@ void Window::Print(string text, int x, int y, COLORREF color)
     // libera o contexto do dispositivo
     ReleaseDC(windowId, xdc);
 }
+
+// -------------------------------------------------------------------------------
+
+void Window::Clear()
+{
+    // captura contexto do dispositivo
+    HDC hdc = GetDC(windowId);
+
+    // pega tamanho da área cliente
+    RECT rect;
+    GetClientRect(windowId, &rect);
+
+    // limpa a área cliente
+    FillRect(hdc, &rect, CreateSolidBrush(Color()));
+
+    // libera o contexto do dispositivo
+    ReleaseDC(windowId, hdc);
+}
+// -------------------------------------------------------------------------------
 
 bool Window::Create()
 {

@@ -31,6 +31,11 @@ private:
     int			windowPosY;                                 // posição inicial da janela no eixo y
     int			windowCenterX;                              // centro da janela no eixo x
     int			windowCenterY;                              // centro da janela no eixo y
+
+    //function reference
+    static void (*inFocus)();								// executar quando a janela ganhar de volta o foco
+    static void (*lostFocus)();								// executar quando a janela perder o foco
+
 public:
     Window();                                               // construtor
 
@@ -53,7 +58,11 @@ public:
     void HideCursor(bool hide);                             // habilita ou desabilita a exbição do cursor
     void Print(string text, int x, int y, COLORREF color);  // mostra texto na janela	
     void Close();                                           // fecha a janela e sai do jogo
+    void Clear();											// limpa a área cliente
     bool Create();                                          // cria a janela com os valores dos atributos	
+
+    void InFocus(void(*func)());							// altera função executada ao ganhar foco
+    void LostFocus(void(*func)());							// altera função executada na perda de foco
 
     // tratamento de eventos do Windows
     static LRESULT CALLBACK WinProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -124,5 +133,14 @@ inline void Window::HideCursor(bool hide)
 inline void Window::Close()
 { PostMessage(windowId, WM_DESTROY, 0, 0);}
 
+// ---------------------------------------------------------------------------------
+
+// altera função executada no ganho de foco
+inline void Window::InFocus(void(*func)())
+{    inFocus = func;}
+
+// altera função executada na perda de foco
+inline void Window::LostFocus(void(*func)())
+{    lostFocus = func;}
 // ---------------------------------------------------------------------------------
 #endif

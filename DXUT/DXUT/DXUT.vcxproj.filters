@@ -22,6 +22,9 @@
     <ClCompile Include="Window.cpp">
       <Filter>DXUT\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>DXUT\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DXUT.h">
@@ -34,6 +37,12 @@
       <Filter>DXUT\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Resources.h">
+      <Filter>DXUT\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>DXUT\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputKeys.h">
       <Filter>DXUT\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
