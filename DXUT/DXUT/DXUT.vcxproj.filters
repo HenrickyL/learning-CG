@@ -78,6 +78,9 @@
     <ClInclude Include="Timer.h">
       <Filter>DXUT\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Error.h">
+      <Filter>DXUT\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources.rc">
