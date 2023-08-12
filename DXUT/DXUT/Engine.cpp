@@ -6,9 +6,10 @@ using std::stringstream;
 // ------------------------------------------------------------------------------
 // Inicialização de variáveis estáticas da classe
 Window* Engine::window = nullptr;		// janela da aplicação
-Input* Engine::input = nullptr;			// dispositivos de entrada
-App* Engine::app = nullptr;				// apontadador da aplicação
+Input*	Engine::input = nullptr;		// dispositivos de entrada
+App*	Engine::app = nullptr;			// apontadador da aplicação
 float   Engine::frameTime = 0.0f;		// tempo do quadro atual
+bool    Engine::paused = false;			// estado do motor
 Timer   Engine::timer;					// medidor de tempo
 // ------------------------------------------------------------------------------
 Engine::Engine()
@@ -64,17 +65,32 @@ int Engine::Loop()
 		}
 		else
 		{
-			// calcula o tempo do quadro
-			frameTime = FrameTime();
+			// -----------------------------------------------
+			// Pausa/Resume Jogo
+			// -----------------------------------------------
 
-			// atualização da aplicação 
-			app->Update();
+			if (input->KeyPress(VK_PAUSE))
+			{
+				if (paused)
+					Resume();
+				else
+					Pause();
+			}
 
-			// desenho da aplicação
-			app->Draw();
+			// -----------------------------------------------
+			if (!paused) {
+				// calcula o tempo do quadro
+				frameTime = FrameTime();
 
-			// aguarda 16 milissegundos ou a próxima interação com a janela
-			MsgWaitForMultipleObjects(0, NULL, FALSE, 10, QS_ALLINPUT);
+				// atualização da aplicação 
+				app->Update();
+
+				// desenho da aplicação
+				app->Draw();
+			}
+			else {
+				app->OnPause();
+			}
 		}
 
 	} while (msg.message != WM_QUIT);

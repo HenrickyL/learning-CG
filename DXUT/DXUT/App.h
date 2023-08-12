@@ -28,5 +28,6 @@ public:
 
 	virtual void Draw() {}						// desenho
 	virtual void Display() {}					// exibição
+	virtual void OnPause() { Sleep(10); }		// em pausa
 };
 #endif

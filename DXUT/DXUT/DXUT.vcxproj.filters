@@ -46,6 +46,9 @@
     <ClCompile Include="Timer.cpp">
       <Filter>DXUT\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Error.cpp">
+      <Filter>DXUT\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DXUT.h">

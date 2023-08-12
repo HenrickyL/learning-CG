@@ -10,20 +10,29 @@ void (*Window::lostFocus)() = nullptr;						// nenhuma ação ao perder foco
 
 Window::Window()
 {
-    windowId = 0;                                           // id nulo porque a janela ainda não existe
-    windowWidth = GetSystemMetrics(SM_CXSCREEN);            // a janela ocupa toda a tela (tela cheia)
-    windowHeight = GetSystemMetrics(SM_CYSCREEN);           // a janela ocupa toda a tela (tela cheia)
-    windowIcon = LoadIcon(NULL, IDI_APPLICATION);           // ícone padrão de uma aplicação
-    windowCursor = LoadCursor(NULL, IDC_ARROW);             // cursor padrão de uma aplicação
-    windowColor = RGB(0, 0, 0);                             // cor de fundo padrão é preta
-    windowTitle = string("Windows App");                    // título padrão da janela
-    windowStyle = WS_POPUP | WS_VISIBLE;                    // estilo para tela cheia
-    windowMode = FULLSCREEN;                                // modo padrão é tela cheia
-    windowPosX = 0;                                         // posição inicial da janela no eixo x
-    windowPosY = 0;                                         // posição inicial da janela no eixo y
-    windowCenterX = windowWidth / 2;                        // centro da janela no eixo x
-    windowCenterY = windowHeight / 2;                       // centro da janela no eixo y
+    windowId	    = 0;									// id nulo porque a janela ainda não existe
+	windowWidth		= GetSystemMetrics(SM_CXSCREEN);		// a janela ocupa toda a tela (tela cheia)
+	windowHeight	= GetSystemMetrics(SM_CYSCREEN);		// a janela ocupa toda a tela (tela cheia)
+	windowIcon		= LoadIcon(NULL, IDI_APPLICATION);		// ícone padrão de uma aplicação
+	windowCursor	= LoadCursor(NULL, IDC_ARROW);			// cursor padrão de uma aplicação
+	windowColor	    = RGB(0,0,0);							// cor de fundo padrão é preta
+	windowTitle		= string("Windows App");				// título padrão da janela
+	windowStyle		= WS_POPUP | WS_VISIBLE;				// estilo para tela cheia
+	windowMode		= FULLSCREEN;							// modo padrão é tela cheia
+	windowPosX		= 0;									// posição inicial da janela no eixo x
+	windowPosY		= 0;									// posição inicial da janela no eixo y
+	windowCenterX   = windowWidth/2;						// centro da janela no eixo x
+	windowCenterY	= windowHeight/2;						// centro da janela no eixo y
+	windowHdc		= { 0 };								// contexto do dispositivo
+	windowRect		= { 0, 0, 0, 0 };						// área cliente da janela
 }
+// -------------------------------------------------------------------------------
+Window::~Window()
+{
+    // libera contexto do dispositivo
+    if (windowHdc) ReleaseDC(windowId, windowHdc);
+}
+// -------------------------------------------------------------------------------
 
 void Window::Mode(WindowModes mode) {
     this->windowMode = mode;
@@ -57,39 +66,16 @@ void Window::Print(string text, int x, int y, COLORREF color)
     // esta função exibe o texto na posição (x,y) da tela usando a cor especificada
     // ela usa a GDI do Windows (lenta) e deve ser usada apenas para depuração
 
-    // pega o contexto do dispositivo gráfico
-    HDC xdc = GetDC(windowId);
-
     // define a cor do texto
-    SetTextColor(xdc, color);
+    SetTextColor(windowHdc, color);
 
     // define o fundo do texto como transparente
-    SetBkMode(xdc, TRANSPARENT);
+    SetBkMode(windowHdc, TRANSPARENT);
 
     // mostra o texto
-    TextOut(xdc, x, y, text.c_str(), (int)text.size());
-
-    // libera o contexto do dispositivo
-    ReleaseDC(windowId, xdc);
+    TextOut(windowHdc, x, y, text.c_str(), (int)text.size());
 }
 
-// -------------------------------------------------------------------------------
-
-void Window::Clear()
-{
-    // captura contexto do dispositivo
-    HDC hdc = GetDC(windowId);
-
-    // pega tamanho da área cliente
-    RECT rect;
-    GetClientRect(windowId, &rect);
-
-    // limpa a área cliente
-    FillRect(hdc, &rect, CreateSolidBrush(Color()));
-
-    // libera o contexto do dispositivo
-    ReleaseDC(windowId, hdc);
-}
 // -------------------------------------------------------------------------------
 
 bool Window::Create()
@@ -99,18 +85,18 @@ bool Window::Create()
 
     // definindo uma classe de janela
     WNDCLASSEX wndClass;
-    wndClass.cbSize = sizeof(WNDCLASSEX);
-    wndClass.style = CS_DBLCLKS | CS_OWNDC | CS_HREDRAW | CS_VREDRAW;
-    wndClass.lpfnWndProc = Window::WinProc;
-    wndClass.cbClsExtra = 0;
-    wndClass.cbWndExtra = 0;
-    wndClass.hInstance = appId;
-    wndClass.hIcon = windowIcon;
-    wndClass.hCursor = windowCursor;
-    wndClass.hbrBackground = (HBRUSH)CreateSolidBrush(windowColor);
-    wndClass.lpszMenuName = NULL;
-    wndClass.lpszClassName = "AppWindow";
-    wndClass.hIconSm = windowIcon;
+    wndClass.cbSize         = sizeof(WNDCLASSEX);
+    wndClass.style          = CS_DBLCLKS | CS_OWNDC | CS_HREDRAW | CS_VREDRAW;
+    wndClass.lpfnWndProc    = Window::WinProc;
+    wndClass.cbClsExtra     = 0;
+    wndClass.cbWndExtra     = 0;
+    wndClass.hInstance      = appId;
+    wndClass.hIcon          = windowIcon;
+    wndClass.hCursor        = windowCursor;
+    wndClass.hbrBackground  = (HBRUSH)CreateSolidBrush(windowColor);
+    wndClass.lpszMenuName   = NULL;
+    wndClass.lpszClassName  = "AppWindow";
+    wndClass.hIconSm        = windowIcon;
 
     // registrando classe "AppWindow"
     if (!RegisterClassEx(&wndClass))
@@ -158,6 +144,11 @@ bool Window::Create()
             winRect.bottom - winRect.top,  // altura
             TRUE);                         // repintar
     }
+    // captura contexto do dispositivo
+    windowHdc = GetDC(windowId);
+
+    // pega tamanho da área cliente
+    GetClientRect(windowId, &windowRect);
 
     // retorna estado da inicialização (bem sucedida ou não)
     return (windowId ? true : false);
@@ -168,7 +159,19 @@ LRESULT CALLBACK Window::WinProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPar
 {
     switch (msg)
     {
-        // a janela foi destruida
+    // janela perdeu o foco
+    case WM_KILLFOCUS:
+        if (lostFocus)
+            lostFocus();
+        return 0;
+
+    // janela recebeu o foco
+    case WM_SETFOCUS:
+        if (inFocus)
+            inFocus();
+        return 0;
+
+    // a janela foi destruida
     case WM_DESTROY:
         // envia uma mensagem WM_QUIT para encerrar o loop da aplicação
         PostQuitMessage(0);

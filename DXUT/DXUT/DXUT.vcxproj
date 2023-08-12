@@ -131,6 +131,7 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="Error.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="WinApp.cpp" />
