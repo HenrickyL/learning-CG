@@ -27,7 +27,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="Window.cpp">
       <Filter>DXUT\Source Files</Filter>
     </ClCompile>
@@ -42,6 +41,9 @@
       <Filter>DXUT\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="App.cpp">
+      <Filter>DXUT\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
       <Filter>DXUT\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -72,6 +74,9 @@
     </ClInclude>
     <ClInclude Include="WinApp.h">
       <Filter>Application\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>DXUT\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
