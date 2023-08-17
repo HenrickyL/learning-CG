@@ -1,7 +1,7 @@
 #ifndef DXUT_ENGINE_H
 #define DXUT_ENGINE_H
 
-//#include "Graphics.h"					// dispositivo gráfico
+#include "Graphics.h"					// dispositivo gráfico
 #include "Window.h"						// janela da aplicação
 #include "Input.h"						// dispositivo de entrada
 #include "Timer.h"						// medidor de tempo
@@ -11,6 +11,7 @@
 
 class Engine{
 private:
+	static Graphics* graphics;          // dispositivo gráfico
 	static Timer timer;					// medidor de tempo
 	static bool paused;                 // estado do aplicação
 
