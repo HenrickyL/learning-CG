@@ -18,6 +18,8 @@ enum WindowModes { FULLSCREEN, WINDOWED };
 // ---------------------------------------------------------------------------------
 class Window {
 private:
+    HDC			windowHdc;									// contexto do dispositivo
+    RECT		windowRect;									// área cliente da janela
     HWND		windowId;                                   // identificador da janela
     int			windowWidth;                                // largura da janela
     int			windowHeight;                               // altura da janela
@@ -38,6 +40,7 @@ private:
 
 public:
     Window();                                               // construtor
+    ~Window();												// destrutor
 
     HWND Id() const;                                        // retorna o identificador da janela
     int Width() const;                                      // retorna a largura atual da janela
@@ -127,11 +130,13 @@ inline void Window::Color(int r, int g, int b)
 inline void Window::HideCursor(bool hide)
 {  ShowCursor(!hide);}
 
-// ----------------------------------------------------------
-
 // fecha a janela e sai do jogo 
 inline void Window::Close()
 { PostMessage(windowId, WM_DESTROY, 0, 0);}
+
+// limpa a área cliente
+inline void Window::Clear()
+{    FillRect(windowHdc, &windowRect, CreateSolidBrush(Color()));}
 
 // ---------------------------------------------------------------------------------
 

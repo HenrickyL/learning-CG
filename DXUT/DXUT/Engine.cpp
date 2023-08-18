@@ -5,21 +5,25 @@ using std::stringstream;
 
 // ------------------------------------------------------------------------------
 // Inicialização de variáveis estáticas da classe
-Window* Engine::window = nullptr;		// janela da aplicação
-Input* Engine::input = nullptr;			// dispositivos de entrada
-App* Engine::app = nullptr;				// apontadador da aplicação
-float   Engine::frameTime = 0.0f;		// tempo do quadro atual
-Timer   Engine::timer;					// medidor de tempo
+Graphics*	Engine::graphics = nullptr;		// dispositivo gráfico
+Window*		Engine::window = nullptr;		// janela da aplicação
+Input*		Engine::input = nullptr;		// dispositivos de entrada
+App*		Engine::app = nullptr;			// apontadador da aplicação
+float		Engine::frameTime = 0.0f;		// tempo do quadro atual
+bool		Engine::paused = false;			// estado do motor
+Timer		Engine::timer;					// medidor de tempo
 // ------------------------------------------------------------------------------
 Engine::Engine()
 {
 	window = new Window();
+	graphics = new Graphics();
 }
 // ------------------------------------------------------------------------------
 
 Engine::~Engine()
 {
 	delete app;
+	delete graphics;
 	delete input;
 	delete window;
 }
@@ -31,14 +35,25 @@ int Engine::Start(App* application)
 	// cria janela da aplicação
 	window->Create();
 
-	// ATENÇÂO: a entrada deve ser instanciada após a criação da janela
+	// inicializa dispositivos de entrada (deve ser feito após criação da janela)
 	input = new Input();
+
+	// inicializa dispositivo gráfico
+	graphics->Initialize(window);
 
 	// altera a window procedure da janela ativa para EngineProc
 	SetWindowLongPtr(window->Id(), GWLP_WNDPROC, (LONG_PTR)EngineProc);
 
-	// retorna resultado da execução
-	return Loop();
+	// ajusta a resolução do Sleep para 1 milisegundo
+	// requer uso da biblioteca winmm.lib
+	timeBeginPeriod(1);
+
+	int exitCode = Loop();
+
+	// volta a resolução do Sleep ao valor original
+	timeEndPeriod(1);
+
+	return exitCode;
 }
 // -------------------------------------------------------------------------------
 
@@ -64,17 +79,32 @@ int Engine::Loop()
 		}
 		else
 		{
-			// calcula o tempo do quadro
-			frameTime = FrameTime();
+			// -----------------------------------------------
+			// Pausa/Resume Jogo
+			// -----------------------------------------------
 
-			// atualização da aplicação 
-			app->Update();
+			if (input->KeyPress(VK_PAUSE))
+			{
+				if (paused)
+					Resume();
+				else
+					Pause();
+			}
 
-			// desenho da aplicação
-			app->Draw();
+			// -----------------------------------------------
+			if (!paused) {
+				// calcula o tempo do quadro
+				frameTime = FrameTime();
 
-			// aguarda 16 milissegundos ou a próxima interação com a janela
-			MsgWaitForMultipleObjects(0, NULL, FALSE, 10, QS_ALLINPUT);
+				// atualização da aplicação 
+				app->Update();
+
+				// desenho da aplicação
+				app->Draw();
+			}
+			else {
+				app->OnPause();
+			}
 		}
 
 	} while (msg.message != WM_QUIT);

@@ -46,6 +46,12 @@
     <ClCompile Include="Timer.cpp">
       <Filter>DXUT\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Error.cpp">
+      <Filter>DXUT\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>DXUT\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DXUT.h">
@@ -76,6 +82,12 @@
       <Filter>Application\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
+      <Filter>DXUT\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Error.h">
+      <Filter>DXUT\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
       <Filter>DXUT\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
