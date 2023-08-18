@@ -159,7 +159,30 @@ void Graphics::LogHardwareInfo()
 	wstringstream text;
 	text << L"---> Resolução: " << screenWidth << L"x" << screenHeight << L" " << refresh << L" Hz\n";
 	OutputDebugStringW(text.str().c_str());
+	// ------------------------------------------
+	// Modos de vídeo suportados pelo monitor
+	// ------------------------------------------
+	if (output)
+	{
+		UINT numModes = 0;
+		DXGI_FORMAT format = DXGI_FORMAT_R8G8B8A8_UNORM; // Formato do modo de exibição (pode variar)
 
+		// Obtém o número de modos de exibição suportados
+		output->GetDisplayModeList(format, 0, &numModes, nullptr);
+
+		DXGI_MODE_DESC* modeList = new DXGI_MODE_DESC[numModes];
+		output->GetDisplayModeList(format, 0, &numModes, modeList);
+
+		wstringstream text;
+		text << L"Resoluções suportadas:\n";
+		for (UINT i = 0; i < numModes; ++i)
+		{
+			text << L"---> " << modeList[i].Width << L"x" << modeList[i].Height << L" " << modeList[i].RefreshRate.Numerator / modeList[i].RefreshRate.Denominator << L" Hz\n";
+		}
+		OutputDebugStringW(text.str().c_str());
+
+		delete[] modeList;
+	}
 	// ------------------------------------------
 
 	// libera interfaces DXGI utilizadas
