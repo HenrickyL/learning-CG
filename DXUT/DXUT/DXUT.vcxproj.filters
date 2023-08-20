@@ -25,6 +25,9 @@
     <Filter Include="Application\Source Files">
       <UniqueIdentifier>{0cd83752-6aca-499c-9dee-580805678c39}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pubic">
+      <UniqueIdentifier>{a9f7ba7c-54da-4ae8-a5a7-411eb57d9449}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp">
@@ -95,5 +98,10 @@
     <ResourceCompile Include="Resources.rc">
       <Filter>DXUT\Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="RefactorGraphics.md">
+      <Filter>Pubic</Filter>
+    </None>
   </ItemGroup>
 </Project>
