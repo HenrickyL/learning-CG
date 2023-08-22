@@ -4,18 +4,6 @@
     <Filter Include="DXUT">
       <UniqueIdentifier>{9256a99d-a076-4ff8-b609-ca8c430b8258}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DXUT\Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="DXUT\Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="DXUT\Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="Application">
       <UniqueIdentifier>{b9a71635-0ccf-4edb-8295-9d8ccc805213}</UniqueIdentifier>
     </Filter>
@@ -28,79 +16,130 @@
     <Filter Include="Pubic">
       <UniqueIdentifier>{a9f7ba7c-54da-4ae8-a5a7-411eb57d9449}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DXUT\Engine">
+      <UniqueIdentifier>{fd622932-f1fc-41cd-8df8-4823f9b5a50b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DXUT\AI">
+      <UniqueIdentifier>{087cc436-e1d3-4990-8ef9-1375197b5915}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DXUT\Engine\Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="DXUT\Engine\Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="DXUT\Engine\Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="DXUT\AI\Header Files">
+      <UniqueIdentifier>{2fe1451c-87f3-4e0e-88fd-51793c558621}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DXUT\AI\Source Files">
+      <UniqueIdentifier>{ef2718e6-67ed-4ea0-b985-df654b827a7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DXUT\Utils">
+      <UniqueIdentifier>{2abd493e-ac88-4585-9868-a66e1c9dfb3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DXUT\Utils\Header Files">
+      <UniqueIdentifier>{0662e03b-0b5c-470a-ac47-1b18ea67ac10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DXUT\Utils\Source Files">
+      <UniqueIdentifier>{e48802a1-0c7f-4aab-b0e6-be541933a692}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp">
-      <Filter>DXUT\Source Files</Filter>
+      <Filter>DXUT\Engine\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
-      <Filter>DXUT\Source Files</Filter>
+      <Filter>DXUT\Engine\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="WinApp.cpp">
       <Filter>Application\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine.cpp">
-      <Filter>DXUT\Source Files</Filter>
+      <Filter>DXUT\Engine\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="App.cpp">
-      <Filter>DXUT\Source Files</Filter>
+      <Filter>DXUT\Engine\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Timer.cpp">
-      <Filter>DXUT\Source Files</Filter>
+      <Filter>DXUT\Engine\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Error.cpp">
-      <Filter>DXUT\Source Files</Filter>
+      <Filter>DXUT\Engine\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Graphics.cpp">
-      <Filter>DXUT\Source Files</Filter>
+      <Filter>DXUT\Engine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadFile.h">
+      <Filter>DXUT\Utils\Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadFile.cpp">
+      <Filter>DXUT\Utils\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AiAgent.cpp">
+      <Filter>DXUT\AI\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DXUT.h">
-      <Filter>DXUT\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Window.h">
-      <Filter>DXUT\Header Files</Filter>
+      <Filter>DXUT\Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="types.h">
-      <Filter>DXUT\Header Files</Filter>
+      <Filter>DXUT\Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Resources.h">
-      <Filter>DXUT\Header Files</Filter>
+      <Filter>DXUT\Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
-      <Filter>DXUT\Header Files</Filter>
+      <Filter>DXUT\Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="InputKeys.h">
-      <Filter>DXUT\Header Files</Filter>
+      <Filter>DXUT\Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine.h">
-      <Filter>DXUT\Header Files</Filter>
+      <Filter>DXUT\Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="App.h">
-      <Filter>DXUT\Header Files</Filter>
+      <Filter>DXUT\Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WinApp.h">
       <Filter>Application\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
-      <Filter>DXUT\Header Files</Filter>
+      <Filter>DXUT\Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Error.h">
-      <Filter>DXUT\Header Files</Filter>
+      <Filter>DXUT\Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Graphics.h">
-      <Filter>DXUT\Header Files</Filter>
+      <Filter>DXUT\Engine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXUT.h">
+      <Filter>DXUT</Filter>
+    </ClInclude>
+    <ClInclude Include="AiAgent.h">
+      <Filter>DXUT\AI\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PDDLDomain.h">
+      <Filter>DXUT\AI\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources.rc">
-      <Filter>DXUT\Resource Files</Filter>
+      <Filter>DXUT\Engine\Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="RefactorGraphics.md">
+      <Filter>Pubic</Filter>
+    </None>
+    <None Include="PDDLInCpp.md">
       <Filter>Pubic</Filter>
     </None>
   </ItemGroup>

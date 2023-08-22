@@ -129,17 +129,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AiAgent.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="LoadFile.cpp" />
+    <ClCompile Include="LoadFile.h" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="WinApp.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AiAgent.h" />
     <ClInclude Include="App.h" />
     <ClInclude Include="DXUT.h" />
     <ClInclude Include="Engine.h" />
@@ -147,6 +151,7 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="InputKeys.h" />
+    <ClInclude Include="PDDLDomain.h" />
     <ClInclude Include="Resources.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="types.h" />
@@ -157,6 +162,7 @@
     <ResourceCompile Include="Resources.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="PDDLInCpp.md" />
     <None Include="RefactorGraphics.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
